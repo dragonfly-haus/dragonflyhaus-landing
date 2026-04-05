@@ -1,9 +1,18 @@
+<script>
+(function(){var t=localStorage.getItem('df-theme')||'dark';document.documentElement.setAttribute('data-theme',t)})();
+</script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
-:root{--fg:#1a1a1a;--bg:#ffffff;--muted:#6b6b6b;--border:#e0e0e0;--accent:#1a1a1a;--subtle:#f5f5f5}
-@media(prefers-color-scheme:dark){:root{--fg:#e8e8e8;--bg:#111111;--muted:#888;--border:#2a2a2a;--accent:#e8e8e8;--subtle:#1a1a1a}}
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap');
+[data-theme="light"]{--fg:#1a1a1a;--bg:#f4f2ef;--muted:#6b6b6b;--border:#e0e0e0;--accent:#3d7a6a;--subtle:#ebe8e4;--switcher-bg:rgba(0,0,0,0.06);--switcher-hover:rgba(0,0,0,0.14);--switcher-fg:#666}
+[data-theme="dark"]{--fg:#e8e8e8;--bg:#111111;--muted:#888;--border:#2a2a2a;--accent:#6fbfaa;--subtle:#1a1a1a;--switcher-bg:rgba(255,255,255,0.06);--switcher-hover:rgba(255,255,255,0.14);--switcher-fg:#888}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'JetBrains Mono',monospace;color:var(--fg);background:var(--bg);max-width:800px;margin:0 auto;padding:60px 40px;line-height:1.7;font-size:13px}
+body{font-family:'JetBrains Mono',monospace;color:var(--fg);background:var(--bg);max-width:800px;margin:0 auto;padding:60px 40px;line-height:1.7;font-size:13px;transition:background 0.5s ease,color 0.5s ease}
+.theme-switcher{position:fixed;top:1.75rem;right:2rem;z-index:50;background:var(--switcher-bg);border:none;border-radius:50%;width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--switcher-fg);transition:background 0.3s ease,color 0.3s ease}
+.theme-switcher:hover{background:var(--switcher-hover);color:var(--accent)}
+.theme-switcher svg{width:0.875rem;height:0.875rem}
+.theme-icon-sun,.theme-icon-moon{display:none}
+[data-theme="dark"] .theme-icon-sun{display:block}
+[data-theme="light"] .theme-icon-moon{display:block}
 h1{font-size:11px;letter-spacing:4px;text-transform:uppercase;font-weight:400;color:var(--muted);margin-bottom:8px}
 h2{font-size:13px;letter-spacing:2px;font-weight:500;margin:48px 0 20px;padding-bottom:8px;border-bottom:1px solid var(--border)}
 h3{font-size:12px;font-weight:500;margin:28px 0 12px;color:var(--muted);letter-spacing:1px}
@@ -17,7 +26,7 @@ p{margin-bottom:16px;color:var(--fg)}
 .card-label{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
 .card-dark{background:var(--fg);color:var(--bg);border-radius:8px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:12px}
 .card-dark .card-label{color:var(--muted)}
-.swatch-row{display:flex;gap:12px;margin:16px 0}
+.swatch-row{display:flex;gap:12px;margin:16px 0;flex-wrap:wrap}
 .swatch{width:60px;height:60px;border-radius:8px;display:flex;align-items:flex-end;padding:6px;font-size:9px;letter-spacing:1px}
 .rule{display:flex;gap:20px;align-items:flex-start;margin:16px 0;padding:16px;border-left:2px solid var(--border)}
 .rule-do{border-left-color:var(--fg)}
@@ -31,6 +40,11 @@ p{margin-bottom:16px;color:var(--fg)}
 .footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:10px;letter-spacing:2px}
 @media print{body{padding:40px 30px}h2{break-before:auto}:root{--fg:#1a1a1a;--bg:#fff;--muted:#6b6b6b;--border:#ddd;--subtle:#f5f5f5}}
 </style>
+
+<button class="theme-switcher" onclick="var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',t);localStorage.setItem('df-theme',t)" aria-label="Toggle theme">
+  <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</button>
 
 <div class="hero">
   <div class="hero-mark">
@@ -51,7 +65,7 @@ p{margin-bottom:16px;color:var(--fg)}
 </div>
 
 <h1>Brand guidelines</h1>
-<p style="color:var(--muted);margin-top:4px">v1.0 — April 2026</p>
+<p style="color:var(--muted);margin-top:4px">v2.0 — April 2026</p>
 
 <h2>01 — Identity</h2>
 <p>dragonfly is a software factory. We build special solutions for clients who find us. We don't advertise, we don't pitch. The brand reflects this: geometric, silent, precise.</p>
@@ -88,8 +102,9 @@ p{margin-bottom:16px;color:var(--fg)}
 </div>
 
 <h2>03 — Color</h2>
-<p>The brand is monochrome. The mark inherits <code>currentColor</code> from its context. No brand color — the absence is intentional.</p>
+<p>The brand has two modes: a monochrome foundation and an accent system. In static contexts (print, documents, avatars), the mark is monochrome — it inherits <code>currentColor</code> from its parent. In digital/interactive contexts (web, applications), the accent teal is used to bring the mark to life.</p>
 
+<h3>Core palette</h3>
 <div class="swatch-row">
   <div class="swatch" style="background:#1a1a1a;color:#888">
     <span>ink<br>#1a1a1a</span>
@@ -97,22 +112,64 @@ p{margin-bottom:16px;color:var(--fg)}
   <div class="swatch" style="background:#e8e8e8;color:#555">
     <span>light<br>#e8e8e8</span>
   </div>
-  <div class="swatch" style="background:#ffffff;border:1px solid #ddd;color:#888">
-    <span>white<br>#ffffff</span>
-  </div>
   <div class="swatch" style="background:#111111;color:#666">
     <span>black<br>#111111</span>
   </div>
+  <div class="swatch" style="background:#f4f2ef;border:1px solid #ddd;color:#888">
+    <span>paper<br>#f4f2ef</span>
+  </div>
 </div>
-<p>For dark backgrounds, use light mark on dark. For light backgrounds, use ink mark on light. Never use grey on grey.</p>
+
+<h3>Accent palette</h3>
+<div class="swatch-row">
+  <div class="swatch" style="background:#5b8c7e;color:#1a1a1a">
+    <span>accent<br>#5b8c7e</span>
+  </div>
+  <div class="swatch" style="background:#6fbfaa;color:#1a1a1a">
+    <span>bright<br>#6fbfaa</span>
+  </div>
+  <div class="swatch" style="background:#3d7a6a;color:#e8e8e8">
+    <span>deep<br>#3d7a6a</span>
+  </div>
+  <div class="swatch" style="background:#4a9a84;color:#1a1a1a">
+    <span>light-accent<br>#4a9a84</span>
+  </div>
+</div>
+<p>The accent teal evokes dragonfly wing iridescence. Use sparingly — for interactive cues (cursors, prompts, focus states), wing coloring in digital mark, and particle/ambient effects. Never as a background fill or dominant UI color.</p>
+
+<h3>Dark theme</h3>
+<div class="spec">
+  <strong>Background:</strong> #111111 (black)<br>
+  <strong>Foreground:</strong> #e8e8e8 (light)<br>
+  <strong>Muted text:</strong> #585858<br>
+  <strong>Accent:</strong> #5b8c7e / #6fbfaa (bright)<br>
+  <strong>Default theme.</strong> Dark-first, always.
+</div>
+
+<h3>Light theme</h3>
+<div class="spec">
+  <strong>Background:</strong> #f4f2ef (warm paper, not pure white)<br>
+  <strong>Foreground:</strong> #1a1a1a (ink)<br>
+  <strong>Muted text:</strong> #777777<br>
+  <strong>Accent:</strong> #3d7a6a / #4a9a84 (deeper teal for contrast on light surfaces)<br>
+  <strong>Grain overlay:</strong> multiply blend (not screen)
+</div>
 
 <h2>04 — Typography</h2>
-<p>One typeface. Monospace only.</p>
+<p>Two typefaces. Monospace leads, serif supports.</p>
 <div class="spec">
   <strong>Primary:</strong> JetBrains Mono<br>
-  <strong>Fallbacks:</strong> SF Mono → Fira Code → Cascadia Code → monospace<br>
+  <strong>Fallbacks:</strong> SF Mono, Fira Code, Cascadia Code, monospace<br>
   <strong>Weights:</strong> 400 (regular), 500 (medium — headings only)<br>
-  <strong>Letter-spacing:</strong> 2–4px for brand text, 0 for body copy
+  <strong>Letter-spacing:</strong> 2-6px for brand text, 0 for body copy<br>
+  <strong>Use for:</strong> Wordmark, UI elements, navigation, terminal, labels, code
+</div>
+<div class="spec">
+  <strong>Secondary:</strong> Instrument Serif (italic)<br>
+  <strong>Fallbacks:</strong> Georgia, Times New Roman, serif<br>
+  <strong>Weight:</strong> 400 only<br>
+  <strong>Use for:</strong> Editorial prose, manifesto copy, descriptive text<br>
+  <strong>Purpose:</strong> Creates tension between the technical monospace voice and a human, literary register. The contrast is intentional — code meets manifesto.
 </div>
 
 <h2>05 — Minimum size</h2>
@@ -143,28 +200,48 @@ p{margin-bottom:16px;color:var(--fg)}
 <h2>06 — Clear space</h2>
 <p>Maintain a clear zone around the mark equal to the width of one front wing. No text, graphics, or edges should enter this zone.</p>
 
-<h2>07 — Usage rules</h2>
+<h2>07 — Digital mark treatment</h2>
+<p>In digital/interactive contexts, the mark comes alive. These treatments are permitted only on screen, never in print or static assets.</p>
+<div class="spec">
+  <strong>Wing coloring:</strong> Front wings in accent-bright (#6fbfaa dark / #4a9a84 light), back wings in accent (#5b8c7e dark / #3d7a6a light). Body and tail remain <code>currentColor</code>.<br>
+  <strong>Wing shimmer:</strong> Slow hue-rotate + brightness animation (8s cycle). Subtle iridescence, not a color show.<br>
+  <strong>Wing beat:</strong> Gentle scaleX breathing (4s cycle, 0.92 minimum). Adds life without distraction.<br>
+  <strong>Float:</strong> Vertical oscillation (6s, 0.5rem amplitude). The mark hovers, never sits static.<br>
+  <strong>Hover state:</strong> Wings brighten to 0.9 / 0.4 opacity on hover.<br>
+  <strong>Radial glow:</strong> Faint teal gradient behind the mark. Atmosphere, not spotlight.
+</div>
+
+<h2>08 — Ambient elements</h2>
+<p>The landing page uses ambient visual systems that extend the brand into environmental design. These are part of the brand language for digital surfaces.</p>
+<div class="spec">
+  <strong>Particle field:</strong> Drifting teal dots with connecting lines between nearby particles. Evokes a living network — decentralised, in motion, interconnected. Particles react to cursor proximity with a gentle push.<br>
+  <strong>Mouse glow:</strong> Soft radial gradient following the cursor. Creates a flashlight-in-the-dark feel. Disabled on mobile.<br>
+  <strong>Grain overlay:</strong> SVG fractal noise texture. Screen blend on dark, multiply on light. Adds analogue warmth to the digital surface.<br>
+  <strong>Cursor:</strong> Crosshair on desktop. Reinforces the precision/builder identity.
+</div>
+
+<h2>09 — Usage rules</h2>
 <div class="rule rule-do">
   <span class="rule-label">Do</span>
   <div>
-    <p>Use the mark at provided proportions. Let it inherit <code>currentColor</code>. Place on solid backgrounds only. Use the icon-only variant for small contexts (favicons, avatars, CLI output).</p>
+    <p>Use the mark at provided proportions. Let it inherit <code>currentColor</code> in static contexts. Use accent teal for wings in digital contexts. Place on solid backgrounds only. Use the icon-only variant for small contexts (favicons, avatars, CLI output). Default to dark theme. Use Instrument Serif italic for editorial/prose copy alongside monospace UI text.</p>
   </div>
 </div>
 <div class="rule rule-dont">
   <span class="rule-label">Don't</span>
   <div>
-    <p>Don't rotate, stretch, add effects, outlines, shadows, or gradients. Don't place on busy or photographic backgrounds. Don't change the wing opacity ratio. Don't use colors — the mark is monochrome only. Don't add a tagline.</p>
+    <p>Don't rotate, stretch, or distort the mark. Don't place on busy or photographic backgrounds. Don't use colors other than monochrome or accent teal on the mark. Don't use the accent teal as a background fill or dominant color — it's for highlights only. Don't add drop shadows, outlines, or 3D effects. Don't add a tagline. Don't use Instrument Serif for UI elements, labels, or navigation — it's for prose only.</p>
   </div>
 </div>
 
-<h2>08 — File inventory</h2>
+<h2>10 — File inventory</h2>
 <div class="spec">
-  <code>dragonfly-lockup.svg</code> — Full logo with wordmark (stacked)<br>
+  <code>dragonfly-logo.svg</code> — Full logo with wordmark (stacked)<br>
   <code>dragonfly-icon.svg</code> — Icon-only mark (square)<br>
   Both use <code>currentColor</code> — set color via CSS on the parent element.
 </div>
 
-<h2>09 — Voice</h2>
+<h2>11 — Voice</h2>
 <p>dragonfly doesn't speak much. When it does:</p>
 <div class="spec">
   <strong>Tone:</strong> Quiet, direct, technical. No exclamation marks.<br>
@@ -173,4 +250,6 @@ p{margin-bottom:16px;color:var(--fg)}
   <strong>No tagline.</strong> No mission statement. No "about" page. The work speaks.
 </div>
 
-<div class="footer">dragonfly.haus — brand guidelines v1.0</div>
+<div class="footer">dragonfly.haus — brand guidelines v2.0</div>
+</content>
+</invoke>
